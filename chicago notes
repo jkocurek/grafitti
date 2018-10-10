@@ -1,0 +1,40 @@
+generate a report
+
+take aldeman's last name and month/year
+
+returns
+·       the full name of the alderman
+
+·       the ward number
+
+·       the month and year covered by the report
+
+·       the total number of graffiti removal requests for the ward for the month
+
+
+so, take aldeman's name and search for his/her record. get record, parse for ward number
+
+take ward no. and month/year and get all records for that time period. add them up.
+
+in model
+
+get_alderman
+ takes last name, month and year. returns zero or more records of alderman information
+
+parse_alderman
+ takes alderman info and returns full name and ward number
+
+get_graffiti
+ takes ward number, month and year and returns zero or more graffiti records
+ use Date class to get number of days in month/year combo
+ https://ruby-doc.org/stdlib-2.5.1/libdoc/date/rdoc/Date.html
+Date.julian_leap?(1900)           #=> true
+Date.julian_leap?(1901)           #=> false
+
+parse_graffiti
+ takes graffiti records and returns number of records
+
+errors
+ alderman_not_found
+ alderman_name_not_specific
+ no_graffiti_records_found

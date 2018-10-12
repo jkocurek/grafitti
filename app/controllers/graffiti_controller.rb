@@ -12,15 +12,19 @@ class GraffitiController < ApplicationController
       render nothing: true, status: :bad_request
     else
       alderman_processed = Alderman.parse_alderman(alderman[0])
-      results = Graffiti.get_graffiti_report(alderman_processed["ward"], params[:month], params[:year])
+      if params[:month].to_i.between?(1,12)
+        results = Graffiti.get_graffiti_report(alderman_processed["ward"], params[:month], params[:year])
 
-      reports["alderman_name"]= alderman_processed["fullname"]
-      reports["ward"] = alderman_processed["ward"]
-      reports["month"]= params[:month]
-      reports["year"]= params[:year]
-      reports["count"] = results
+        reports["alderman_name"]= alderman_processed["fullname"]
+        reports["ward"] = alderman_processed["ward"]
+        reports["month"]= params[:month]
+        reports["year"]= params[:year]
+        reports["count"] = results
 
-      render json: reports
+        render json: reports
+      else
+        render nothing: true, status: :bad_request
+      end
     end 
   end
 end
